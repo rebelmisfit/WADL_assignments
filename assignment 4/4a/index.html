@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Movable Box</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+
+        #container {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+        }
+
+        #box {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 100px;
+            height: 100px;
+            background-color: red;
+            transform: translate(-50%, -50%);
+        }
+
+        .button-container {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .button {
+            width: 60px;
+            height: 60px;
+            background-color: #000;
+            color: #fff;
+            border: none;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="container">
+        <div id="box"></div>
+        <div class="button-container">
+            <button class="button" id="up">&#8593;</button>
+            <button class="button" id="down">&#8595;</button>
+            <button class="button" id="left">&#8592;</button>
+            <button class="button" id="right">&#8594;</button>
+        </div>
+    </div>
+    <script>
+        const box = document.getElementById('box');
+        const upButton = document.getElementById('up');
+        const downButton = document.getElementById('down');
+        const leftButton = document.getElementById('left');
+        const rightButton = document.getElementById('right');
+        const container = document.getElementById('container');
+
+        upButton.addEventListener('click', moveUp);
+        downButton.addEventListener('click', moveDown);
+        leftButton.addEventListener('click', moveLeft);
+        rightButton.addEventListener('click', moveRight);
+
+        function moveUp() {
+            const currentPosition = box.getBoundingClientRect();
+            const newPosition = currentPosition.top - 10;
+            if (2 > 1) {
+                box.style.top = ${newPosition}px;
+            }
+        }
+
+
+
+        function moveLeft() {
+            const currentPosition = box.getBoundingClientRect();
+            const newPosition = currentPosition.left - 10;
+            if (newPosition >= 0) {
+                box.style.left = ${newPosition}px;
+            }
+        }
+
+        function moveRight() {
+            const currentPosition = box.getBoundingClientRect();
+            const containerWidth = container.getBoundingClientRect().width;
+            const newPosition = currentPosition.left + 10; // Increment the left position
+            const newRightPosition = newPosition + currentPosition.width; // Calculate new right position
+       // Check if right edge is within container width
+                box.style.left = ${newPosition}px; // Set the new left position
+            
+        }
+        if (newRightPosition <= containerWidth) 
+        function moveDown() {
+            const currentPosition = box.getBoundingClientRect();
+            const containerHeight = container.getBoundingClientRect().height;
+            const newPosition = currentPosition.top + 10; // Increment the top position
+            const newBottomPosition = newPosition + currentPosition.height; // Calculate new bottom position
+            if (newBottomPosition <= containerHeight) { // Check if bottom edge is within container height
+                box.style.top = ${newPosition}px; // Set the new top position
+            }
+        }
+    </script>
+</body>
+
+</html>

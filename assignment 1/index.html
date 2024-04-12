@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Google Icon API -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href = "style.css" rel = "stylesheet">
+    <title>OurMail</title>
+    <style>
+
+@media screen and (max-width: 600px) {
+            .header {
+                display: block;
+                text-align: center;
+            }
+
+            .header-left,
+            .header-right,
+            .header-middle {
+                text-align: center;
+            }
+
+            .header-middle input {
+                width: 80%;
+            }
+
+            .sidebar {
+                width: 100%;
+                text-align: center;
+                position: relative;
+            }
+
+            .email-compose-container {
+                width: 90%;
+                right: 5%;
+            }
+
+            .emailListSections,
+            .emailList-list {
+                padding: 0 10px;
+            }
+
+            .emailRowTitle h3 {
+                font-size: 16px;
+            }
+
+            .emailRowMessage h4 {
+                font-size: 14px;
+            }
+
+            .emailRowMessageTime {
+                display: none;
+            }
+        }
+        .email-compose-container {
+            width: 400px;
+            height: 260px;
+            border: 1px solid #ccc;
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            position: absolute;
+            background-color: white;
+            bottom: 10px; /* Position at the bottom */
+            right: 10px; /* Position at the right */
+        }
+
+        .email-cancel-icon {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            cursor: pointer;
+        }
+
+        .email-section {
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 10px;
+            margin-bottom: 10px;
+        }
+
+        .email-section:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+
+        .email-section label {
+            font-weight: bold;
+        }
+
+        .email-section textarea {
+            width: 100%;
+            padding: 5px;
+        }
+
+        .email-button-container {
+            display: flex;
+            justify-content: flex-end; /* Align buttons to the right */
+            align-items: center; /* Vertically align buttons */
+        }
+
+        .email-button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+
+        .material-icons {
+            font-size: 20px;
+            margin-left: 10px;
+            cursor: pointer;
+            color: grey;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Starts -->
+    <div class="header">
+        <div class="header-left">
+            <div class="menu-icon">
+                <i class="material-icons">menu</i>
+            </div>
+            <img src = "mail_image.png"/>
+            <h3 style = "padding-left: 10px;">Our Mail</h3>
+        </div>
+        <div class="header-middle">
+            <div class="search-icon">
+                <i class="material-icons">search</i>
+            </div>
+            <input type = "text" placeholder= "Search Mail" />
+            <div class="drop-down-icon">
+                <i class="material-icons">arrow_drop_down</i>
+            </div>
+        </div>
+        <div class="header-right">
+            <div class="apps">
+                <i class="material-icons">apps</i>
+            </div>
+            <div class="notificatios">
+                <i class="material-icons">notifications</i>
+            </div>
+            <div class = "account_circle">
+                <i class="material-icons">account_circle</i>
+            </div>
+            
+        </div>
+    </div>
+    <!-- Header Ends -->
+    <!-- Main Body Starts -->
+    <div class="main-body">
+        <!-- Sidebar starts -->
+            <div class="sidebar">
+                <button onclick = "myFunction()" class="sidebar_compose">
+                <span class="material-icons">add</span>
+                    Compose
+                </button>
+                <div class="sidebarOption sidebarOption_active">
+                    <span class="material-icons"> inbox </span>
+                    <h3>Inbox</h3>
+                </div>
+                <div class="sidebarOption ">
+                    <span class="material-icons"> star </span>
+                    <h3>Starred</h3>
+                </div>
+                <div class="sidebarOption ">
+                    <span class="material-icons"> access_time </span>
+                    <h3>Snoozed</h3>
+                </div>
+                <div class="sidebarOption ">
+                    <span class="material-icons"> label_important </span>
+                    <h3>Important</h3>
+                </div>
+                <div class="sidebarOption ">
+                    <span class="material-icons"> near_me </span>
+                    <h3>Sent</h3>
+                </div>
+                <div class="sidebarOption ">
+                    <span class="material-icons"> note </span>
+                    <h3>Drafts</h3>
+                </div>
+                <div class="sidebarOption ">
+                    <span class="material-icons"> expand_more </span>
+                    <h3>More</h3>
+                </div>
+                <div class="sidebar-footer">
+                    <div class="sidebar-footer-icons">
+                        <span class="material-icons"> person </span>
+                        <span class="material-icons"> duo </span>
+                        <span class="material-icons"> phone </span>
+                    </div>
+                </div>
+            </div>
+        <!-- Sidebar ends -->
+    
+        <!-- Email List Starts -->
+                <div class="emailList">
+                    <!-- Setting Starts -->
+                    <div class="email-compose-container" id = "abc">
+                        <!-- Add Cancel Icon -->
+                        <i class="material-icons email-cancel-icon">cancel</i>
+                        <div class="email-section">
+                            <label for="to">To:</label>
+                        </div>
+                        <div class="email-section">
+                            <label for="from">From:</label>
+                        </div>
+                        <div class="email-section">
+                            <label for="subject">Subject:</label>
+                        </div>
+                        <div class="email-section">
+                            <label for="body">Body:</label>
+                            <textarea id="body" name="body" rows="4"></textarea>
+                        </div>
+                        <div class="email-button-container">
+                            <button class="email-button">Send</button>
+                            <!-- Add Material UI Icons -->
+                            <i class="material-icons" style="padding-right : 280px">delete</i>
+                            <i class="material-icons">attach_file</i>
+                        </div>
+                    </div>
+                    <div class="emailListSettings">
+                        <div class="emailListSettingsLeft">
+                            <input type = "checkbox" />
+                            <span class="material-icons"> arrow_drop_down </span>
+                            <span class="material-icons"> redo </span>
+                            <span class="material-icons"> more_vert </span>
+
+                        </div>
+                        <div class="emailListSettingsRight">
+                            <span class="material-icons"> chevron_left </span>
+                            <span class="material-icons"> chevron_right </span>
+                            <span class="material-icons"> keyboard_hide </span>
+                            <span class="material-icons"> settings </span>
+                        </div>
+                    </div>
+                    <!-- Setting Ends -->
+
+                    <!-- Section Starts -->
+                    <div class="emailListSections">
+                        <div class="section sectionSelected">
+                            <span class = "material-icons">inbox</span>
+                            <h4>Primary</h4>
+                        </div>
+                        <div class="section">
+                            <span class = "material-icons">people</span>
+                            <h4>Social</h4>
+                        </div>
+                        <div class="section">
+                            <span class = "material-icons">local_offer</span>
+                            <h4>Promotions</h4>
+                        </div>
+                    </div>
+                    <!-- Section Ends -->
+                    <!-- Email List Row Starts -->
+                        <div class="emailList-list">
+                            <!-- Email Row Starts -->
+                            <div class="emailRow">
+                                <div class="emailRowOptions">
+                                    <input type = "checkbox">
+                                    <span class = "material-icons">star_border</span>
+                                    <span class = "material-icons">label_important</span>
+                                </div>
+                                <div class="emailRowTitle">
+                                    <h3>YouTube</h3>
+                                </div>
+                                <div class="emailRowMessage">
+                                    <h4>
+                                    Your account has been limited. <span class="emailRowMessageDescription">Account Id : 23456#45</span>
+                                    </h4>
+                                </div>
+                                <div class="emailRowMessageTime">
+                                    10 pm
+                                </div>
+                            </div>
+                            <!-- Email Row Ends -->
+                            <!-- Email Row Starts -->
+                            <div class="emailRow">
+                                <div class="emailRowOptions">
+                                    <input type = "checkbox">
+                                    <span class = "material-icons">star_border</span>
+                                    <span class = "material-icons">label_important</span>
+                                </div>
+                                <div class="emailRowTitle">
+                                    <h3>YouTube</h3>
+                                </div>
+                                <div class="emailRowMessage">
+                                    <h4>
+                                    Your account has been limited. <span class="emailRowMessageDescription">Account Id : 23456#45</span>
+                                    </h4>
+                                </div>
+                                <div class="emailRowMessageTime">
+                                    10 pm
+                                </div>
+                            </div>
+                            <!-- Email Row Ends -->
+                            <!-- Email Row Starts -->
+                            <div class="emailRow">
+                                <div class="emailRowOptions">
+                                    <input type = "checkbox">
+                                    <span class = "material-icons">star_border</span>
+                                    <span class = "material-icons">label_important</span>
+                                </div>
+                                <div class="emailRowTitle">
+                                    <h3>YouTube</h3>
+                                </div>
+                                <div class="emailRowMessage">
+                                    <h4>
+                                    Your account has been limited. <span class="emailRowMessageDescription">Account Id : 23456#45</span>
+                                    </h4>
+                                </div>
+                                <div class="emailRowMessageTime">
+                                    10 pm
+                                </div>
+                            </div>
+                            <!-- Email Row Ends -->
+                            <!-- Email Row Starts -->
+                            <div class="emailRow">
+                                <div class="emailRowOptions">
+                                    <input type = "checkbox">
+                                    <span class = "material-icons">star_border</span>
+                                    <span class = "material-icons">label_important</span>
+                                </div>
+                                <div class="emailRowTitle">
+                                    <h3>YouTube</h3>
+                                </div>
+                                <div class="emailRowMessage">
+                                    <h4>
+                                    Your account has been limited. <span class="emailRowMessageDescription">Account Id : 23456#45</span>
+                                    </h4>
+                                </div>
+                                <div class="emailRowMessageTime">
+                                    10 pm
+                                </div>
+                            </div>
+                            <!-- Email Row Ends -->
+                            <!-- Email Row Starts -->
+                            <div class="emailRow">
+                                <div class="emailRowOptions">
+                                    <input type = "checkbox">
+                                    <span class = "material-icons">star_border</span>
+                                    <span class = "material-icons">label_important</span>
+                                </div>
+                                <div class="emailRowTitle">
+                                    <h3>Christine</h3>
+                                </div>
+                                <div class="emailRowMessage">
+                                    <h4>
+                                    Sending HCI Notes for Viva Prep <span class="emailRowMessageDescription"></span>
+                                    </h4>
+                                </div>
+                                <div class="emailRowMessageTime">
+                                    10 pm
+                                </div>
+                            </div>
+                            <!-- Email Row Ends -->
+                            <!-- Email Row Starts -->
+                            <div class="emailRow">
+                                <div class="emailRowOptions">
+                                    <input type = "checkbox">
+                                    <span class = "material-icons">star_border</span>
+                                    <span class = "material-icons">label_important</span>
+                                </div>
+                                <div class="emailRowTitle">
+                                    <h3>Christine</h3>
+                                </div>
+                                <div class="emailRowMessage">
+                                    <h4>
+                                    Sending HCI Notes for Viva Prep <span class="emailRowMessageDescription"></span>
+                                    </h4>
+                                </div>
+                                <div class="emailRowMessageTime">
+                                    10 pm
+                                </div>
+                            </div>
+                            <!-- Email Row Ends -->
+                            <!-- Email Row Starts -->
+                            <div class="emailRow">
+                                <div class="emailRowOptions">
+                                    <input type = "checkbox">
+                                    <span class = "material-icons">star_border</span>
+                                    <span class = "material-icons">label_important</span>
+                                </div>
+                                <div class="emailRowTitle">
+                                    <h3>Kavita</h3>
+                                </div>
+                                <div class="emailRowMessage">
+                                    <h4>
+                                    Sharing OS Ref. Book .<span class="emailRowMessageDescription">I used it for Unit 4.</span>
+                                    </h4>
+                                </div>
+                                <div class="emailRowMessageTime">
+                                    10 pm
+                                </div>
+                            </div>
+                            <!-- Email Row Ends -->
+
+                        </div>
+                    <!-- Email List Row Ends -->
+
+                </div>
+        <!-- Email List Ends -->
+    </div>
+    <!-- Main Body Ends -->
+    <script>
+        var y = document.getElementsByClassName("email-compose-section");
+        if(y != null)
+        {
+            console.log("XXXXXX");
+        }
+        function myFunction() {
+            var x = document.getElementById("abc");
+            if (x.style.display === "none") {
+              x.style.display = "block";
+            } else {
+              x.style.display = "none";
+            }
+        }
+        
+        
+    </script>
+</body>
+</html>
+
+
+
